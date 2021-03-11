@@ -130,7 +130,7 @@ async def animate_spaceship(canvas, ship_states, max_row, max_col):
 
     for state in cycle(ship_states):
         dy, dx, spaced = read_controls(canvas)
-        if spaced and year >= 1900:
+        if spaced and year >= 2020:
             coroutines.append(fire(
                                 canvas,
                                 start_row=row,
@@ -227,9 +227,14 @@ def draw(canvas):
 
         if PHRASES.get(year):
             last_year = year
-            new_win.addstr(1, 1, LABEL_CLEAR_TOOL)
-
-        new_win.addstr(1, 1, f"{str(year)} {PHRASES.get(last_year)}")
+            try:
+                new_win.addstr(1, 1, LABEL_CLEAR_TOOL)
+            except:
+                pass
+        try:
+            new_win.addstr(1, 1, f"{str(year)} {PHRASES.get(last_year)}")
+        except:
+            pass
 
 
 if __name__ == '__main__':
