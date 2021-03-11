@@ -26,8 +26,19 @@ async def sleep(tics=1):
   for i in range(randint(0, tics)):
     await asyncio.sleep(0)
 
+def get_frames(file_paths):
+  frames = []
+  for filepath in file_paths:
+    with open(filepath) as frame_file:
+    	frames.append(frame_file.read())
+  return frames
+
 def init_ship():
-  return [open('animation/rocket_frame_1.txt').read(), open('animation/rocket_frame_2.txt').read()]
+  file_paths = [
+  		'animation/rocket_frame_1.txt', 
+  		'animation/rocket_frame_2.txt'
+  ]
+  return get_frames(file_paths)
 
 
 def init_all_the_garbage():
@@ -39,13 +50,7 @@ def init_all_the_garbage():
       'animation/garbage/trash_xl.txt',
       'animation/garbage/hubble.txt',
   ]
-  frames = []
-
-  for filepath in file_paths:
-    with open(filepath) as frame_file:
-    	frames.append(frame_file.read())
-
-  return frames
+  return get_frames(file_paths)
 
 
 async def generate_obstacles(canvas, max_width):
